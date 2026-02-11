@@ -1,0 +1,23 @@
+name: CI-CD Pipeline
+
+on:
+  push:
+    brances:
+      -main
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      -name: Checkout code
+      uses: actions/checkout@v3
+
+      -name: Install dependencies
+      run: npm install
+
+      -name: Run tests
+      run: npm test
+
+      -name: Build docker image
+      run: docker build -t devops-app .
